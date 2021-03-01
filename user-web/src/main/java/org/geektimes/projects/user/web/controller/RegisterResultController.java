@@ -14,14 +14,13 @@ import javax.ws.rs.Path;
  * @author chenyue
  * @date 2021/2/28
  */
-@Path("/register")
-public class UserRegisterController implements PageController {
+@Path("/registerDo")
+public class RegisterResultController implements PageController {
     private UserServiceImpl userService = new UserServiceImpl();
     @Override
     @GET
     @POST
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        System.out.println("aa");
         User user = new User();
         user.setId(System.currentTimeMillis());
         user.setName(request.getParameter("inputName"));
