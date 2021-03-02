@@ -37,8 +37,9 @@ public class DBConnectionManager {
     public void initConnection() {
         String databaseURL = "jdbc:derby:/db/user-platform;create=true";
         try {
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
             this.connection = DriverManager.getConnection(databaseURL);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e.getCause());
         }
     }
