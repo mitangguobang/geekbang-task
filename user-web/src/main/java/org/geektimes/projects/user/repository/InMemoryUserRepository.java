@@ -26,6 +26,7 @@ public class InMemoryUserRepository implements UserRepository {
 
     @Override
     public boolean update(User user) {
+        save(user);
         return true;
     }
 

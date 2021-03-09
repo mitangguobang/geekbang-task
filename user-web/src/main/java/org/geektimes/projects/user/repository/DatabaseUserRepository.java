@@ -1,6 +1,7 @@
 package org.geektimes.projects.user.repository;
 
 import org.geektimes.function.ThrowableFunction;
+import org.geektimes.context.ComponentContext;
 import org.geektimes.projects.user.domain.User;
 import org.geektimes.projects.user.sql.DBConnectionManager;
 
@@ -25,15 +26,22 @@ public class DatabaseUserRepository implements UserRepository {
      */
     private static Consumer<Throwable> COMMON_EXCEPTION_HANDLER = e -> logger.log(Level.SEVERE, e.getMessage());
 
-    public static final String INSERT_USER_DML_SQL = "INSERT INTO users(name,password,email,phoneNumber) VALUES (?,?,?,?)";
+    public static final String INSERT_USER_DML_SQL =
+            "INSERT INTO users(name,password,email,phoneNumber) VALUES " +
+                    "(?,?,?,?)";
 
     public static final String QUERY_ALL_USERS_DML_SQL = "SELECT id,name,password,email,phoneNumber FROM users";
 
     private final DBConnectionManager dbConnectionManager;
 
-    public DatabaseUserRepository(DBConnectionManager dbConnectionManager) {
-        this.dbConnectionManager = dbConnectionManager;
+    public DatabaseUserRepository() {
+        this.dbConnectionManager = ComponentContext.getInstance().getComponent("bean/DBConnectionManager");
     }
+
+//    public DatabaseUserRepository(DBConnectionManager dbConnectionManager) {
+//        this.dbConnectionManager = dbConnectionManager;
+//    }
+
 
     private Connection getConnection() {
         return dbConnectionManager.getConnection();
@@ -61,8 +69,7 @@ public class DatabaseUserRepository implements UserRepository {
     }
 
     public static void main(String[] args) {
-        DBConnectionManager dbConnectionManager = new DBConnectionManager(true);
-        DatabaseUserRepository u = new DatabaseUserRepository(dbConnectionManager);
+        DatabaseUserRepository u = new DatabaseUserRepository();
 
         User user = new User();
         user.setName("test-add3");

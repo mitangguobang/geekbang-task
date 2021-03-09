@@ -27,6 +27,7 @@ public class RegisterResultController implements PageController {
         user.setEmail(request.getParameter("inputEmail"));
         user.setPhoneNumber(request.getParameter("inputTel"));
         user.setPassword(request.getParameter("inputPassword"));
+
         if (true == userService.register(user)) {
             return "register-success.jsp";
         } else {

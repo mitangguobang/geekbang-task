@@ -1,22 +1,43 @@
 package org.geektimes.projects.user.domain;
 
+import org.geektimes.projects.user.validator.bean.validation.TelephoneChina;
+
+import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Objects;
+
+import static javax.persistence.GenerationType.AUTO;
 
 /**
  * 用户领域对象
  *
  * @since 1.0
  */
-public class User {
+@Entity
+@Table(name = "users")
+public class User implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = AUTO)
+    @Min(value = 1, message = "ID必须为大于0的整数")
     private Long id;
 
+    @Column
     private String name;
 
+    @Column
+    @Size(min = 6, max = 32, message = "密码必须为6-32位")
     private String password;
 
+    @Column
     private String email;
 
+    @Column
+    @TelephoneChina
     private String phoneNumber;
 
     public Long getId() {
