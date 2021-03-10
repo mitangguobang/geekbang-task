@@ -153,7 +153,7 @@ public class FrontControllerServlet extends HttpServlet {
                     }
 
                 }
-            } catch (Throwable throwable) {
+             } catch (Throwable throwable) {
                 if (throwable.getCause() instanceof IOException) {
                     throw (IOException) throwable.getCause();
                 } else {

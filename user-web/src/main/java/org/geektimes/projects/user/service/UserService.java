@@ -1,5 +1,6 @@
 package org.geektimes.projects.user.service;
 
+import org.geektimes.bo.ReturnValue;
 import org.geektimes.projects.user.domain.User;
 import org.geektimes.projects.user.sql.LocalTransactional;
 
@@ -15,7 +16,7 @@ public interface UserService {
      * @return 成功返回<code>true</code>
      */
     @LocalTransactional
-    boolean register(User user);
+    ReturnValue register(User user);
 
     /**
      * 注销用户

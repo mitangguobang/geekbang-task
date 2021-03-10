@@ -5,6 +5,6 @@
 </head>
 <body>
 	<div class="container-lg">
-		注册失败
+		注册失败：<%=request.getAttribute("errorMsg") %>
 	</div>
 </body>

@@ -22,8 +22,8 @@
 	<div class="container">
 		<form class="form-register"  method="post" action="registerDo">
 			<h1 class="h3 mb-3 font-weight-normal">注册</h1>
-			<label for="inputName" class="sr-only">姓名：</label> <!-required->
-            <input type="text" id="inputName"name="inputName" class="form-control" placeholder="请输入姓名" autofocus>
+			<label for="inputName" class="sr-only">用户名：</label> <!-required->
+            <input type="text" id="inputName"name="inputName" class="form-control" placeholder="请输入用户名" autofocus>
             <br>
 			<label for="inputTel" class="sr-only">手机：</label>
             <input type="tel" id="inputTel" name="inputTel" class="form-control" placeholder="请输入手机号">
