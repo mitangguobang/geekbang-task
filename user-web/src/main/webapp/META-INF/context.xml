@@ -22,6 +22,11 @@
               driverClassName="org.apache.derby.jdbc.EmbeddedDriver"
               url="jdbc:derby:/db/user-platform;create=true"/>
 
+	<!-- FactoryBean -->
+	<Resource name="bean/DBConnectionManager" auth="Container"
+			  type="org.geektimes.projects.user.sql.DBConnectionManager"
+			  factory="org.apache.naming.factory.BeanFactory" />
+
 	<!--
 	缺少指定 interface 类型的属性
 	目标注入的类型：javax.persistence.EntityManager
@@ -31,11 +36,6 @@
 			  persistenceUnitName="emf"
 			  propertiesLocation="META-INF/jpa-datasource.properties"
 			  factory="org.apache.naming.factory.BeanFactory" />
-	<!-- FactoryBean -->
-	<Resource name="bean/DBConnectionManager" auth="Container"
-			  type="org.geektimes.projects.user.sql.DBConnectionManager"
-			  factory="org.apache.naming.factory.BeanFactory" />
-
 
 	<Resource name="bean/Validator" auth="Container"
 			  type="org.geektimes.projects.user.validator.bean.validation.DelegatingValidator"
@@ -45,4 +45,7 @@
 			  type="org.geektimes.projects.user.service.UserServiceImpl"
 			  factory="org.apache.naming.factory.BeanFactory" />
 
+	<!-- Tomcat JNDI 配置 -->
+	<Environment name="maxValue" value="12"
+				 type="java.lang.Integer" override="false"/>
 </Context>

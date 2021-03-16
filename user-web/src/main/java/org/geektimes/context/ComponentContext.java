@@ -85,9 +85,6 @@ public class ComponentContext {
      * </ol>
      */
     protected void initializeComponents() {
-        try {
-
-
         componentsMap.values().forEach(component -> {
             Class<?> componentClass = component.getClass();
             // 注入阶段 - {@link Resource}
@@ -97,10 +94,6 @@ public class ComponentContext {
             // TODO 实现销毁阶段 - {@link PreDestroy}
             processPreDestroy();
         });
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
     }
 
     private void injectComponents(Object component, Class<?> componentClass) {
@@ -118,25 +111,24 @@ public class ComponentContext {
                 // 注入目标对象
                 field.set(component, injectedObject);
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
             }
         });
     }
 
-    private void processPostConstruct(Object component, Class<?> componentClass){
-            Stream.of(componentClass.getMethods())
-                    .filter(method ->
-                            !Modifier.isStatic(method.getModifiers()) &&      // 非 static
-                                    method.getParameterCount() == 0 &&        // 没有参数
-                                    method.isAnnotationPresent(PostConstruct.class) // 标注 @PostConstruct
-                    ).forEach(method -> {
-                // 执行目标方法
-                try {
-                    method.invoke(component);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            });
+    private void processPostConstruct(Object component, Class<?> componentClass) {
+        Stream.of(componentClass.getMethods())
+                .filter(method ->
+                        !Modifier.isStatic(method.getModifiers()) &&      // 非 static
+                                method.getParameterCount() == 0 &&        // 没有参数
+                                method.isAnnotationPresent(PostConstruct.class) // 标注 @PostConstruct
+                ).forEach(method -> {
+            // 执行目标方法
+            try {
+                method.invoke(component);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     private void processPreDestroy() {
@@ -183,7 +175,7 @@ public class ComponentContext {
         return result;
     }
 
-    protected <C> C lookupComponent(String name) {
+    public <C> C lookupComponent(String name) {
         return executeInContext(context -> (C) context.lookup(name));
     }
 

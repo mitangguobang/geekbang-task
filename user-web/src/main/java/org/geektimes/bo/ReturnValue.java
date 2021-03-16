@@ -2,16 +2,17 @@ package org.geektimes.bo;
 
 /**
  * @author chenyue
- * @date 2021/3/10
+ * @date 2021/3/15
  */
 public class ReturnValue {
     private Boolean code;
     private String message;
-
-    public ReturnValue(Boolean code, String message) {
+    public ReturnValue(){};
+    public ReturnValue(Boolean code, String message){
         this.code = code;
         this.message = message;
     }
+
     public Boolean getCode() {
         return code;
     }
